@@ -30,7 +30,11 @@ dt %>%
 dt[1:5, State:`Area code`]
 
 # Применение функции к каждому столбцу: apply
+sapply(select_if(dt, is.numeric), max)
+select_if(dt, is.numeric) %>% map_dbl(max)
 
-
+# замена значений
+dt[, `International plan` := ifelse(`International plan` == 'Yes', T, F)]
+dt %>% mutate(`International plan` := ifelse(`International plan` == 'Yes', T, F))
 
 
