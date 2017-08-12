@@ -62,9 +62,35 @@ dt %>%
   select(Churn, `International plan`) %>% 
   table() %>% 
   prop.table()
-dt[, .N, by = c('Churn', 'International plan')][, N/sum(N)]
+dt[, .N, by = c('Churn', 'International plan')][, Churn, N/sum(N)]
 
+# добавление столбцов
+dt %>% 
+  mutate('Total calls' = `Total day charge` + `Total eve charge` + `Total night charge` + `Total intl charge`)
+dt[, 'Total calls' := `Total day charge` + `Total eve charge` + `Total night charge` + `Total intl charge`]
 
+# удаление столбцов
+dt[, `Total calls` := NULL]
+dt %>% 
+  select(-one_of('Total calls'))
+
+# первый прогноз
+dt %>% 
+  select(Churn, `International plan`) %>% 
+  table()
+
+dt %>% 
+  select(Churn, `Customer service calls`) %>% 
+  table()
+
+dt[, Many_service_calls := ifelse(`Customer service calls` > 3, 1L, 0L)]
+dt %>% 
+  select(Churn, `Many_service_calls`) %>% 
+  table()
+
+dt %>% 
+  select(Churn, `Many_service_calls`, `International plan`) %>% 
+  table()
 
 
 
