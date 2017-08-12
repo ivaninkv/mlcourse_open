@@ -52,6 +52,21 @@ dt %>%
   select(columns_to_show) %>% 
   summarise_each(funs(min, max, mean), columns_to_show)
 
+# сводные таблицы
+dt %>% 
+  select(Churn, `International plan`) %>% 
+  table()
+dt[, .N, by = c('Churn', 'International plan')]
+
+dt %>% 
+  select(Churn, `International plan`) %>% 
+  table() %>% 
+  prop.table()
+dt[, .N, by = c('Churn', 'International plan')][, N/sum(N)]
+
+
+
+
 
 
 
