@@ -37,4 +37,21 @@ select_if(dt, is.numeric) %>% map_dbl(max)
 dt[, `International plan` := ifelse(`International plan` == 'Yes', T, F)]
 dt %>% mutate(`International plan` := ifelse(`International plan` == 'Yes', T, F))
 
+# группировка
+columns_to_show = c('Total day minutes', 'Total eve minutes', 'Total night minutes', 'Churn')
+dt %>% 
+  select(columns_to_show) %>% 
+  group_by(Churn) %>% 
+  summarise(mean(`Total day minutes`))
+
+dt %>% 
+  select(columns_to_show) %>% 
+  psych::describeBy('Churn')
+
+dt %>% 
+  select(columns_to_show) %>% 
+  summarise_each(funs(min, max, mean), columns_to_show)
+
+
+
 
