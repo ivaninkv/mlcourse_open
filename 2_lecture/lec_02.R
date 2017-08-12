@@ -62,7 +62,7 @@ dt %>%
   ggplot(aes(Genre, Platform, fill = Global_Sales)) +
   geom_tile() +
   #coord_equal() +
-  scale_fill_gradient(low = "white", high = "red") +
+  scale_fill_gradient(low = 'white', high = 'red', na.value = 'transparent') +
   geom_text(aes(label = Global_Sales))
   
 
