@@ -66,8 +66,30 @@ dt %>%
   geom_text(aes(label = Global_Sales))
   
 
+rm(list = ls())
+gc()
+
+dt <- fread('telecom_churn.csv', stringsAsFactors = T)
+dt %>% 
+  ggplot(aes(Churn, fill = Churn)) + 
+  geom_bar() + 
+  ggtitle('Распределение оттока клиентов') +
+  theme(plot.title = element_text(hjust = 0.5))
 
 
+dt %>% 
+  select(-one_of('State', 'International plan', 'Voice mail plan', 'Area code')) %>% 
+  cor() %>% 
+  ggcorr(label = TRUE)
+  
 
+for.hist <- c('State', 'International plan', 'Voice mail plan',  'Area code',
+               'Total day charge',   'Total eve charge',   'Total night charge',
+               'Total intl charge', 'Churn')
+for (i in for.hist) {
+  ggplot(dt, aes(i)) + geom_histogram()
+}
+
+ggplot(dt, aes(State)) + geom_histogram()
 
 
