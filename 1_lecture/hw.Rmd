@@ -10,7 +10,7 @@ output:
 rm(list = ls())
 gc()
 
-setwd('d:/DS/mlcourse_open/1_lecture/')
+#setwd('d:/DS/mlcourse_open/1_lecture/')
 
 library(data.table)
 library(tidyverse)
@@ -57,7 +57,7 @@ dt %>%
   summarise_each(funs(mean, sd))
 ```
 
-6. Правда ли, что люди, которые получают больше 50k, имеют как минимум высшее образование? (признак education - Bachelors, Prof-school, Assoc-acdm, Assoc-voc, Masters или Doctorate)
+6. Правда ли, что люди, которые получают больше 50k, имеют как минимум высшее образование? (признак education - Bachelors, Prof-school, Assoc-acdm, Assoc-voc, Masters или Doctorate) 
 ```{r}
 unique(dt[salary == '>50K', education])
 ```
@@ -74,7 +74,7 @@ dt %>%
 
 ```
 
-8. Среди кого больше доля зарабатывающих много (>50K): среди женатых или холостых мужчин (признак marital-status)? Женатыми считаем тех, у кого marital-status начинается с Married (Married-civ-spouse, Married-spouse-absent или Married-AF-spouse), остальных считаем холостыми.
+8. Среди кого больше доля зарабатывающих много (&gt;50K): среди женатых или холостых мужчин (признак marital-status)? Женатыми считаем тех, у кого marital-status начинается с Married (Married-civ-spouse, Married-spouse-absent или Married-AF-spouse), остальных считаем холостыми.
 ```{r}
 dt[, married := ifelse(regexpr('Married', dt$`marital-status`) == 1, T, F)]
 dt[, married := grepl('Married', dt$`marital-status`)]

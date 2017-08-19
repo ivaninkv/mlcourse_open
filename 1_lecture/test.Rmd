@@ -1,0 +1,19 @@
+---
+title: "HW 1"
+output:
+  pdf_document: default
+  html_notebook: default
+  html_document: default
+---
+
+```{r, message=FALSE, warning=FALSE, include=FALSE}
+rm(list = ls())
+gc()
+
+setwd('d:/DS/mlcourse_open/1_lecture/')
+
+library(data.table)
+library(tidyverse)
+library(stringr)
+
+dt <- fread('adult.data.csv', stringsAsFactors = T)
